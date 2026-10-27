@@ -1,0 +1,176 @@
+{
+ "apnee-juvenile": {
+  "w": 360,
+  "h": 585,
+  "spine": "#535452",
+  "light": false
+ },
+ "avez-vous-ou-de-quoi-avez-vous-peur": {
+  "w": 360,
+  "h": 544,
+  "spine": "#f6f1e7",
+  "light": true
+ },
+ "derealisation-et-depersonnalisation": {
+  "w": 360,
+  "h": 522,
+  "spine": "#a6a4a3",
+  "light": true
+ },
+ "edgar-faure-secrets-detat-secrets-de-famille": {
+  "w": 360,
+  "h": 543,
+  "spine": "#940d24",
+  "light": false
+ },
+ "guerir-de-ses-angoisses-avec-la-therapie-par-telephone": {
+  "w": 360,
+  "h": 527,
+  "spine": "#ffffff",
+  "light": true
+ },
+ "la-nef-n1-quel-est-notre-futur": {
+  "w": 360,
+  "h": 548,
+  "spine": "#f8efcb",
+  "light": true
+ },
+ "la-nef-n2-quest-ce-que-le-courage": {
+  "w": 360,
+  "h": 552,
+  "spine": "#ef9ea1",
+  "light": true
+ },
+ "la-peur-naura-plus-le-dernier-mot": {
+  "w": 360,
+  "h": 524,
+  "spine": "#010810",
+  "light": false
+ },
+ "le-cercle": {
+  "w": 360,
+  "h": 517,
+  "spine": "#12191f",
+  "light": false
+ },
+ "lorraines": {
+  "w": 360,
+  "h": 509,
+  "spine": "#acacac",
+  "light": true
+ },
+ "pervers-narcissiques": {
+  "w": 600,
+  "h": 900,
+  "spine": "#e0d6ca",
+  "light": true
+ },
+ "peurs-angoisses-phobies-par-ici-la-sortie": {
+  "w": 232,
+  "h": 328,
+  "spine": "#ff732c",
+  "light": false
+ },
+ "psychotherapie-et-realite-virtuelle": {
+  "w": 322,
+  "h": 500,
+  "spine": "#ffffff",
+  "light": true
+ },
+ "sans-totem-ni-tabou": {
+  "w": 232,
+  "h": 322,
+  "spine": "#ffffff",
+  "light": true
+ },
+ "se-liberer-des-troubles-anxieux-par-la-realite-virtuelle": {
+  "w": 320,
+  "h": 451,
+  "spine": "#9fbdbb",
+  "light": true
+ },
+ "stress-angoisses-depressions": {
+  "w": 360,
+  "h": 578,
+  "spine": "#fdfdfd",
+  "light": true
+ },
+ "une-vie-heureuse-et-reussie-mode-demploi": {
+  "w": 232,
+  "h": 338,
+  "spine": "#fce3cb",
+  "light": true
+ },
+ "vaincre-langoisse-un-psy-a-votre-ecoute": {
+  "w": 360,
+  "h": 524,
+  "spine": "#ffffff",
+  "light": true
+ },
+ "vous-netes-peut-etre-pas-bipolaire": {
+  "w": 360,
+  "h": 511,
+  "spine": "#5ca2cc",
+  "light": false
+ },
+ "vous-savez-quoi-faire": {
+  "w": 600,
+  "h": 845,
+  "spine": "#feaa65",
+  "light": true
+ },
+ "angoisses-pluralite-dapproches": {
+  "w": 360,
+  "h": 463,
+  "spine": "#ffffff",
+  "light": true
+ },
+ "fertilite-de-la-psychanalyse-contemporaine": {
+  "w": 360,
+  "h": 573,
+  "spine": "#0a6d59",
+  "light": false
+ },
+ "heinz-kohut-psychanalystes-daujourdhui": {
+  "w": 360,
+  "h": 571,
+  "spine": "#fef7eb",
+  "light": true
+ },
+ "kohut-et-la-psychologie-du-self": {
+  "w": 360,
+  "h": 541,
+  "spine": "#e3e2e6",
+  "light": true
+ },
+ "la-perversion-ou-la-vie-klim-lhomme-aux-deux-noms": {
+  "w": 360,
+  "h": 573,
+  "spine": "#fefefe",
+  "light": true
+ },
+ "le-choix-du-sexe": {
+  "w": 360,
+  "h": 508,
+  "spine": "#ecdaae",
+  "light": true
+ },
+ "les-bebes-de-linconscient": {
+  "w": 360,
+  "h": 541,
+  "spine": "#ffffe1",
+  "light": true
+ },
+ "psychanalyse-neurosciences-cognitivismes": {
+  "w": 360,
+  "h": 555,
+  "spine": "#fefefe",
+  "light": true
+ },
+ "repenser-la-psychanalyse-avec-les-sciences": {
+  "w": 360,
+  "h": 573,
+  "spine": "#f0cc8f",
+  "light": true
+ }
+}
