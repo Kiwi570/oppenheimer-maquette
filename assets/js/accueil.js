@@ -133,11 +133,11 @@
       var frame = $('.screen__frame', visio);
       var vtl = gsap.timeline({
         scrollTrigger: {
-          trigger: visio, start: 'center 52%', end: '+=' + (window.innerHeight * 2.4), pin: visio.closest('section'), pinSpacing: true, scrub: .6,
+          trigger: visio, start: 'center 52%', end: '+=' + (window.innerHeight * 2), pin: visio.closest('section'), pinSpacing: true, scrub: .6,
           onUpdate: function (self) { setStep(Math.min(3, Math.floor(self.progress * 4))); }
         }
       });
-      vtl.fromTo(frame, { filter: 'brightness(.25)' }, { filter: 'brightness(1)', duration: .5, ease: 'none' }, 0);
+      vtl.fromTo(frame, { filter: 'brightness(.62)' }, { filter: 'brightness(1)', duration: .4, ease: 'none' }, 0);
       if (stroke) vtl.to(stroke, { strokeDashoffset: 0, duration: .5, ease: 'none' }, 0);
       steps.forEach(function (s, i) {
         var bar = $('.step__bar', s);
@@ -146,8 +146,17 @@
       $$('.screen__img img', visio).forEach(function (im, i) {
         vtl.fromTo(im, { scale: 1.08 }, { scale: 1, duration: 1, ease: 'none' }, i);
       });
-      // la section est épinglée en entier : on ne garde que la scène visible
-      ScrollTrigger.refresh();
+      /* une étape cliquée amène le défilement à son niveau */
+      steps.forEach(function (s, i) {
+        s.setAttribute('tabindex', '0');
+        var jump = function () {
+          var st = vtl.scrollTrigger; if (!st) return;
+          var y = st.start + (st.end - st.start) * ((i + .55) / 4);
+          if (RO.lenis) RO.lenis.scrollTo(y, { duration: 1.2 }); else window.scrollTo({ top: y, behavior: 'smooth' });
+        };
+        s.addEventListener('click', function (e) { if (!e.target.closest('a')) jump(); });
+        s.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); jump(); } });
+      });
     } else {
       setStep(0);
     }
