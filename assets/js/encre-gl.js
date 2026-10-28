@@ -84,6 +84,10 @@ void main() {
   gl_FragColor = vec4(outC * alpha, alpha);
 }`;
 
+/* L'image de repli reste masquée (CSS) tant que WebGL n'a pas répondu :
+   elle ne s'affiche qu'en cas d'échec (délai de sécurité dans site.js). */
+function noGl() { if (!root.classList.contains('has-gl')) root.classList.add('no-gl'); }
+
 function start() {
   if (!host) return;
   const calm = root.classList.contains('calme');
@@ -91,9 +95,9 @@ function start() {
   let renderer;
   try {
     renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: false, dpr: Math.min(window.devicePixelRatio || 1, window.innerWidth < 760 ? 1.25 : 1.6) });
-  } catch (e) { return; }
+  } catch (e) { noGl(); return; }
   const gl = renderer.gl;
-  if (!gl) return;
+  if (!gl) { noGl(); return; }
   gl.clearColor(0, 0, 0, 0);
   host.appendChild(gl.canvas);
   gl.canvas.setAttribute('aria-hidden', 'true');
@@ -160,8 +164,8 @@ function start() {
     if (calm) { program.uniforms.uSpread.value = 1; renderer.render({ scene: mesh }); return; }
     requestAnimationFrame(frame);
   };
-  img.onerror = () => { gl.canvas.remove(); };
+  img.onerror = () => { gl.canvas.remove(); noGl(); };
   if (fallback && fallback.alt) gl.canvas.setAttribute('title', fallback.alt);
 }
 
-try { start(); } catch (e) { /* l'image de repli reste affichée */ }
+try { start(); } catch (e) { noGl(); /* l'image de repli s'affiche */ }

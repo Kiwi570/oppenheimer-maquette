@@ -100,6 +100,33 @@
   window.addEventListener('scroll', onScrollHeader, { passive: true });
   onScrollHeader();
 
+  /* Hauteurs réelles de l'en-tête et de la barre du bas, pour les scènes épinglées et le dernier bloc */
+  var dock = $('.dock');
+  function measureBars() {
+    if (header) root.style.setProperty('--entete-h', header.offsetHeight + 'px');
+    if (dock) root.style.setProperty('--barres-h', (getComputedStyle(dock).display === 'none' ? 0 : dock.offsetHeight) + 'px');
+  }
+  measureBars();
+  if (window.ResizeObserver) { var ro = new ResizeObserver(measureBars); if (header) ro.observe(header); if (dock) ro.observe(dock); }
+  window.addEventListener('resize', measureBars);
+
+  /* Barre du bas : seulement une fois l'ouverture dépassée, jamais sur le pied de page */
+  if (dock) {
+    var heroEl = $('.hero'), footEl = $('.footer'), seen = {};
+    if (!heroEl || body.getAttribute('data-page') === 'introuvable') body.classList.add('dock-off');
+    else if ('IntersectionObserver' in window) {
+      body.classList.add('dock-off');
+      var io = new IntersectionObserver(function (en) {
+        en.forEach(function (e) { seen[e.target === heroEl ? 'hero' : 'foot'] = e.isIntersecting; });
+        body.classList.toggle('dock-off', !!(seen.hero || seen.foot));
+      });
+      io.observe(heroEl); if (footEl) io.observe(footEl);
+    }
+  }
+
+  /* Image de repli de l'encre : affichée si WebGL n'a pas répondu à temps */
+  if ($('.stain__fallback')) setTimeout(function () { if (!root.classList.contains('has-gl')) root.classList.add('no-gl'); }, 1500);
+
   var burger = $('.burger'), menu = $('#menu');
   function closeMenu() {
     if (!body.classList.contains('menu-open')) return;
@@ -412,8 +439,10 @@
     var dist = function () { return Math.max(0, track.scrollWidth - innerWidth); };
     if (dist() < 40) return null;
     scroller.classList.add('is-pinned');
+    /* scène plein écran : tout tient entre l'en-tête et le bas de l'écran */
+    if (opts.stage) viewport.classList.add('is-stage');
     var tw = gsap.to(track, { x: function () { return -dist(); }, ease: 'none' });
-    var st = ScrollTrigger.create({ trigger: viewport, start: opts.start || 'center 56%', end: function () { return '+=' + Math.round(dist() * (opts.speed || .7)); }, pin: true, scrub: .6, animation: tw, invalidateOnRefresh: true, anticipatePin: 1, onUpdate: opts.onUpdate });
+    var st = ScrollTrigger.create({ trigger: viewport, start: opts.start || 'center 56%', end: function () { return '+=' + Math.round(dist() * (opts.speed || .7)); }, pin: true, scrub: .6, animation: tw, invalidateOnRefresh: true, anticipatePin: opts.stage ? 0 : 1, onUpdate: opts.onUpdate });
     tw._st = st;
     /* clavier : un livre qui reçoit le focus est amené à l'écran */
     track.addEventListener('focusin', function (e) {
@@ -439,7 +468,7 @@
       if (bar) bar.style.transform = 'scaleX(' + Math.max(.06, p) + ')';
       if (nEl) nEl.textContent = Math.min(books.length, 1 + Math.round(p * (books.length - 1)));
     };
-    var shTw = hPin(homeShelf, $('.shelf-scroll', homeShelf), $('.shelf', homeShelf), { start: 'center 53%', speed: .62, onUpdate: function (self) { setProg(self.progress); } });
+    var shTw = hPin(homeShelf, $('.shelf-scroll', homeShelf), $('.shelf', homeShelf), { start: 'top top', stage: true, speed: .62, onUpdate: function (self) { setProg(self.progress); } });
     if (!shTw) {
       var sc = $('.shelf-scroll', homeShelf);
       sc.addEventListener('scroll', function () { setProg(sc.scrollLeft / Math.max(1, sc.scrollWidth - sc.clientWidth)); }, { passive: true });
